@@ -21,4 +21,6 @@ IMAGE_INSTALL:append = " \
   \
   minicom \
   screen \
+  \
+  less \
 "
