@@ -26,6 +26,7 @@ IMAGE_INSTALL:append = " \
   screen \
   \
   less \
+  tree \
   \
   mtd-utils \
   mtd-utils-ubifs \
