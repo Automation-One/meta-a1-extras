@@ -8,6 +8,9 @@ IMAGE_INSTALL:append = " \
   modemmanager \
   networkmanager \
   networkmanager-nmcli \
+  networkmanager-ppp \
+  networkmanager-wifi \
+  networkmanager-wwan \
   iptables \
   \
   python3 \
