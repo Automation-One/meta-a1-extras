@@ -26,4 +26,10 @@ IMAGE_INSTALL:append = " \
   screen \
   \
   less \
+  \
+  mtd-utils \
+  mtd-utils-ubifs \
+  \
+  libgpiod \
+  libgpiod-tools \
 "
