@@ -1,0 +1,52 @@
+#!/bin/sh
+# -*- shell-script -*-
+
+info() {
+    echo "INFO: $@"
+}
+
+error() {
+    stop_activity
+
+    echo "ERROR: $@"
+    echo "none" > /sys/class/leds/ledA/trigger
+    echo 0 > /sys/class/leds/ledA/brightness
+    exit 1
+}
+
+warn() {
+    echo "WARN: $@"
+}
+
+stop_activity() {
+    echo "none" > /sys/class/leds/ledA/trigger
+    echo 1 > /sys/class/leds/ledA/brightness
+}
+
+UBOOT="/installer-data/flash.bin"
+ROOTFS="/installer-data/rootfs.ubi"
+
+
+echo "timer" > /sys/class/leds/ledA/trigger
+
+# Sometimes the spi device probe is delayed, wait for /dev/mtd1 device
+# before start the installer process
+count=0
+while [ ! -e /dev/mtd1 ] && [  $count -lt 60 ]; do
+    sleep 1
+    let count=count+1
+done
+
+info "Programming U-Boot in SPI NOR"
+#flash_erase -q /dev/mtd1 0 0 || error "Failed to erase /dev/mtd1"
+dd if=$UBOOT of=/dev/mtdblock1 bs=1k seek=1 || error "Failed to write flash.bin"
+
+info "Programming rootfs UBI image"
+ubidetach -m 0
+flash_erase -q /dev/mtd0 0 0 || error "Failed to erase /dev/mtd0"
+ubiformat -q /dev/mtd0 -f "$ROOTFS" || error "Failed to write the rootfs image"
+
+info "Installation SUCCESS: stopping"
+sync
+
+stop_activity
