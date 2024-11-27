@@ -1,6 +1,6 @@
 test -n "$BOOT_SYSTEM" || setenv BOOT_SYSTEM "A"
 
-test -n "${default_bootargs}" || setenv default_bootargs "console=ttymxc3,115200 rootwait ro ubi.mtd=0"
+test -n "${default_bootargs}" || setenv default_bootargs "console=ttymxc3,115200 rootwait ro ubi.mtd=0 init=/sbin/preinit"
 
 
 

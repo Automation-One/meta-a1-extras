@@ -7,7 +7,13 @@ inherit image_types_a1_ubi
 DEPENDS += " ubi-boot-partition"
 
 IMAGE_FSTYPES:append = " ubifs a1_ubi"
-IMAGE_FEATURES += " read-only-rootfs"
+IMAGE_FEATURES += " overlayfs-etc read-only-rootfs"
+
+create_data_mountpoint() {
+    mkdir -p ${IMAGE_ROOTFS}/data
+}
+ROOTFS_POSTPROCESS_COMMAND += "create_data_mountpoint; "
+
 
 do_create_data_ubifs() {
     mkdir -p ${WORKDIR}/ubi-staging
