@@ -13,10 +13,6 @@ IMAGE_INSTALL:append = " \
   networkmanager-wwan \
   iptables \
   \
-  python3 \
-  python3-pip \
-  python3-paramiko \
-  \
   curl \
   openssl \
   ca-certificates \
