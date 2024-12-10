@@ -7,6 +7,7 @@ inherit image_types_a1_ubi
 DEPENDS += " ubi-boot-partition"
 
 IMAGE_FSTYPES:append = " ubifs a1_ubi"
+IMAGE_FSTYPES:remove = " wic "
 IMAGE_FEATURES += " overlayfs-etc read-only-rootfs"
 IMAGE_INSTALL += " overlayfs-home"
 
