@@ -1,7 +1,7 @@
 SUMMARY = "Automation One Installer Image to NAND device"
 LICENSE = "MIT"
 
-require a1-image.bb
+inherit core-image
 
 A1_INSTALLER_IMAGE_ROOTFS = "a1-ubi-image-${MACHINE}"
 A1_INSTALLER_U_BOOT = "flash.bin"
