@@ -37,16 +37,33 @@ while [ ! -e /dev/mtd1 ] && [  $count -lt 60 ]; do
     let count=count+1
 done
 
+if [ $count -eq 60 ]; then
+    error "/dev/mtd1 not found after 60 seconds"
+fi
+
 info "Programming U-Boot in SPI NOR"
 #flash_erase -q /dev/mtd1 0 0 || error "Failed to erase /dev/mtd1"
 dd if=$UBOOT of=/dev/mtdblock1 bs=1k seek=1 || error "Failed to write flash.bin"
 
+info "Detaching UBI0 from MTD0"
+attempt=0
+max_attempts=3
+while [ $attempt -lt $max_attempts ]; do
+    ubidetach -m 0 && break
+    attempt=$((attempt + 1))
+    warn "Failed to detach UBI0 from MTD0, attempt $attempt/$max_attempts"
+    sleep 5
+done
+
+if [ $attempt -eq $max_attempts ]; then
+    error "Failed to detach UBI0 from MTD0 after $max_attempts attempts"
+fi
+
 info "Programming rootfs UBI image"
-ubidetach -m 0
 flash_erase -q /dev/mtd0 0 0 || error "Failed to erase /dev/mtd0"
 ubiformat -q /dev/mtd0 -f "$ROOTFS" || error "Failed to write the rootfs image"
 
 info "Installation SUCCESS: stopping"
-sync
+sync; sync; sync
 
 stop_activity
