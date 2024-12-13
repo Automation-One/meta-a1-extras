@@ -49,3 +49,8 @@ IMAGE_INSTALL:append = " \
     libgpiod \
     libgpiod-tools \
 "
+
+install_skel_files_for_root() {
+    cp -a ${IMAGE_ROOTFS}${sysconfdir}/skel/. ${IMAGE_ROOTFS}/home/root/
+}
+ROOTFS_POSTPROCESS_COMMAND += "install_skel_files_for_root; "
