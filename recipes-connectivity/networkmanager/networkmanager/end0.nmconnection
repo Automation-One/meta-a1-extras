@@ -1,0 +1,12 @@
+[connection]
+id=end0
+type=ethernet
+interface-name=end0
+autoconnect=true
+autoconnect-priority=-20
+
+[ipv4]
+method=auto
+
+[ipv6]
+method=auto

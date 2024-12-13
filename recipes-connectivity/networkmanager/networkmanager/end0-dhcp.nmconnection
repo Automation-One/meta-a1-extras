@@ -1,0 +1,14 @@
+[connection]
+id=end0-dhcp
+type=ethernet
+interface-name=end0
+autoconnect=false
+autoconnect-priority=-10
+
+[ipv4]
+method=shared
+address1=10.0.0.1/24
+lease-time=3600
+
+[ipv6]
+method=ignore
