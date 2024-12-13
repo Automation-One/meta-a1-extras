@@ -48,6 +48,9 @@ IMAGE_INSTALL:append = " \
     \
     libgpiod \
     libgpiod-tools \
+    \
+    \
+    root-authorized-keys \
 "
 
 install_skel_files_for_root() {
