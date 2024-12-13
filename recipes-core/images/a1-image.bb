@@ -16,6 +16,8 @@ python () {
         d.setVar('EXTRA_USERS_PARAMS', r"usermod -p $(openssl passwd ${ROOT_PASSWORD} | sed 's/\$/\\$/g') root;")
 }
 
+IMAGE_FEATURES += " allow-root-login "
+
 IMAGE_INSTALL:append = " \
     modemmanager \
     networkmanager \
