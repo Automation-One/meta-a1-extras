@@ -11,6 +11,9 @@ SRC_URI += " \
 
 PACKAGECONFIG:append = " modemmanager "
 
+END0_DHCP ?= "false"
+END1_DHCP ?= "false"
+
 do_install:append() {
     install -d ${D}${sysconfdir}/NetworkManager
     install -m 0644 ${WORKDIR}/NetworkManager.conf ${D}${sysconfdir}/NetworkManager/NetworkManager.conf
