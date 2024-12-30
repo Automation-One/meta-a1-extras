@@ -17,7 +17,7 @@ do_install() {
     install -Dm 0644 ${WORKDIR}/${PN}.service ${D}${systemd_unitdir}/system/${PN}.service
 }
 
-RDEPENDS_${PN} += "\
+RDEPENDS:${PN} += "\
     curl \
     libgpiod-tools \
     mtd-utils \
