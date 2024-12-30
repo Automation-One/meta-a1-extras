@@ -18,6 +18,8 @@ python () {
 
 IMAGE_FEATURES += " allow-root-login "
 
+INCLUDE_A1_SUITE ?= "false"
+
 IMAGE_INSTALL:append = " \
     modemmanager \
     networkmanager \
@@ -57,3 +59,8 @@ install_skel_files_for_root() {
     cp -a ${IMAGE_ROOTFS}${sysconfdir}/skel/. ${IMAGE_ROOTFS}/home/root/
 }
 ROOTFS_POSTPROCESS_COMMAND += "install_skel_files_for_root; "
+
+python() {
+    if d.getVar('INCLUDE_A1_SUITE') == "true":
+        d.appendVar('IMAGE_INSTALL', ' python3-a1-suite')
+}
