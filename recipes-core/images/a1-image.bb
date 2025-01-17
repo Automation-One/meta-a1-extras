@@ -64,3 +64,10 @@ python() {
     if d.getVar('INCLUDE_A1_SUITE') == "true":
         d.appendVar('IMAGE_INSTALL', ' python3-a1-suite')
 }
+
+python() {
+    if d.getVar('NTP_PROVIDER') == "ntpd":
+        d.appendVar('IMAGE_INSTALL', ' ntp')
+    elif d.getVar('NTP_PROVIDER') == "chrony":
+        d.appendVar('IMAGE_INSTALL', ' chrony')
+}
