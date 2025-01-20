@@ -63,6 +63,8 @@ ROOTFS_POSTPROCESS_COMMAND += "install_skel_files_for_root; "
 python() {
     if d.getVar('INCLUDE_A1_SUITE') == "true":
         d.appendVar('IMAGE_INSTALL', ' python3-a1-suite')
+    if d.getVar('INCLUDE_MBUSD') == "true":
+        d.appendVar('IMAGE_INSTALL', ' mbusd')
 }
 
 python() {
