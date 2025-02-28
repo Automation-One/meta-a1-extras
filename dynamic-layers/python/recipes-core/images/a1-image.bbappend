@@ -1,6 +1,2 @@
 
-IMAGE_INSTALL:append = " \
-  python3 \
-  python3-pip \
-  python3-paramiko \
-"
+IMAGE_INSTALL:append = "${@'python3 python3-pip python3-paramiko' if d.getVar('INCLUDE_PYTHON') else ''}"
